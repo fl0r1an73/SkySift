@@ -1,0 +1,16 @@
+[Unit]
+Description=SkySift ADS-B bridge
+After=network-online.target readsb.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=skyradar
+WorkingDirectory=/opt/skysift
+EnvironmentFile=/opt/skysift/config.env
+ExecStart=/usr/bin/python3 /opt/skysift/skysift.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

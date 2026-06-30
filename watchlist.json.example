@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "name": "local_heavy",
+      "registration": [
+        "N123AB"
+      ]
+    },
+    {
+      "name": "sample_operator",
+      "operator_code": [
+        "BAW"
+      ],
+      "aircraft_type": [
+        "A388"
+      ]
+    }
+  ]
+}
