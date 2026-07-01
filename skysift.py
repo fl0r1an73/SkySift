@@ -231,6 +231,7 @@ RARE_ICONIC_TEXT_MARKERS = (
 )
 
 REASON_PRIORITY = {
+    "emergency": 2000,
     "watchlist": 1000,
     "military": 500,
     "helicopter": 400,
@@ -730,6 +731,10 @@ class Bridge:
         )
 
         reasons: list[str] = []
+
+        squawk = str(state.get("squawk") or "").strip()
+        if squawk in {"7500", "7600", "7700"}:
+            reasons.append(f"emergency:{squawk}")
 
         is_military = (
             aircraft_type in MILITARY_TYPE_CODES

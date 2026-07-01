@@ -53,6 +53,7 @@
 
 Each interesting aircraft may include reasons such as:
 
+- `emergency:7700`
 - `military`
 - `helicopter`
 - `bizjet`
@@ -117,6 +118,7 @@ The file is reloaded automatically when changed.
 The default `interesting` selection is no longer the old broad "any fresh airborne aircraft" view.
 An aircraft now needs to pass the freshness / position filters and then match at least one spotter-oriented heuristic:
 
+- emergency squawks `7500`, `7600`, `7700`
 - military traffic
 - helicopters
 - bizjets / private aviation
