@@ -729,6 +729,7 @@ class Bridge:
         searchable_text = " ".join(
             value for value in (description, operator_name, operator_callsign) if value
         )
+        helicopter_text = " ".join(value for value in (description,) if value)
 
         reasons: list[str] = []
 
@@ -747,7 +748,7 @@ class Bridge:
         is_helicopter = (
             category == "A7"
             or starts_with_any(aircraft_type, HELICOPTER_TYPE_PREFIXES)
-            or contains_any(searchable_text, HELICOPTER_TEXT_MARKERS)
+            or contains_any(helicopter_text, HELICOPTER_TEXT_MARKERS)
         )
         if is_helicopter:
             reasons.append("helicopter")
