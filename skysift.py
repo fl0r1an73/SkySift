@@ -36,6 +36,10 @@ COUNTRY_FLAGS = {
     "United States": "US",
 }
 
+OPERATOR_CALLSIGN_PREFIX_EXCLUSIONS = (
+    "SAMU",
+)
+
 MILITARY_TYPE_CODES = {
     "A400",
     "ATLA",
@@ -386,6 +390,15 @@ def contains_any(value: str, markers: tuple[str, ...]) -> bool:
     return any(marker in value for marker in markers)
 
 
+def should_infer_operator_from_callsign(callsign: str | None) -> bool:
+    normalized = normalize_text(callsign)
+    if len(normalized) < 3:
+        return False
+    if any(normalized.startswith(prefix) for prefix in OPERATOR_CALLSIGN_PREFIX_EXCLUSIONS):
+        return False
+    return True
+
+
 class AircraftDb:
     def __init__(self, base_path: Path | None) -> None:
         self.base_path = self._resolve_base_path(base_path)
@@ -471,7 +484,7 @@ class AircraftDb:
                 }
             )
 
-        if callsign:
+        if should_infer_operator_from_callsign(callsign):
             operator_code = callsign[:3].upper()
             operator = self._operators.get(operator_code)
             if operator:
